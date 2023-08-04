@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section>
+    <div class="login-box">
+        <form  method="POST" action="" name="submit-to-google-sheet">
+            <h2>Login</h2>
+            <div class = "input-box">
+                <span class = "icon"></span>
+                <input type="text" name="username" placeholder="Username" required>
+                
+
+            </div>
+            <div class = "input-box">
+                <span class = "icon"></span>
+                <input type="text" name="email" placeholder="E-Mail" required>
+                
+
+            </div>
+            <div class = "input-box">
+                <span class = "icon"></span>
+                <input type="number" name="number" placeholder="Number" required>
+                
+
+            </div>
+            <div class = "input-box">
+                <span class = "icon"></span>
+                <input type="number" name="age" placeholder="Age" required>
+                
+
+            </div>
+            <div class = "input-box">
+                <span class = "icon"></span>
+                <input type="text" name="category" placeholder="Category" required>
+                
+
+            </div>
+            <div class = "input-box">
+                <span class = "icon"></span>
+                <input type="text" name="experience" placeholder="Experience" required>
+            </div>
+            
+            <input type="submit" value="SUBMIT" />
+
+        </form>
+        
+    </div>
+</section>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz05BSbW1I6l5QDPACXJ2C8oHdebf_R5ewi8iBrJ8S3vLZht7MfNuojze2LxbT8TFa0/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+    
+</body>
+</html>
