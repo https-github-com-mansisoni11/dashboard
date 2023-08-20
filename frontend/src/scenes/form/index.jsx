@@ -1,14 +1,32 @@
 import { Box, Button, TextField } from "@mui/material";
-import { Formik } from "formik";
+import { Formik, Field  } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import Select from 'react-select';
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = (values) => {
+  const options = [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+  ];
+
+  const scriptURL =
+    "https://script.google.com/macros/s/AKfycbz05BSbW1I6l5QDPACXJ2C8oHdebf_R5ewi8iBrJ8S3vLZht7MfNuojze2LxbT8TFa0/exec";
+
+  const handleFormSubmit = async (values) => {
     console.log(values);
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams(values),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -19,6 +37,7 @@ const Form = () => {
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={checkoutSchema}
+        name="submit-to-google-form"
       >
         {({
           values,
@@ -115,6 +134,41 @@ const Form = () => {
                 helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 4" }}
               />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="number"
+                label="Experience"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.experience}
+                name="experience"
+                error={!!touched.experience && !!errors.experience}
+                helperText={touched.experience && errors.experience}
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="number"
+                label="age"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.age}
+                name="age"
+                error={!!touched.age && !!errors.age}
+                helperText={touched.age && errors.experience}
+                sx={{ gridColumn: "span 4" }}
+              />
+              {/* Dropdown here */}
+              {/* CSS Styling Pending */}
+              <Field
+            name="selectedOption"
+            component={Select}
+            options={options}
+            value={values.category}
+            placeholder="Select an option..."
+          />
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
