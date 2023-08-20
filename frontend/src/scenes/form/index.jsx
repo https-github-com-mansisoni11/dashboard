@@ -162,6 +162,7 @@ const Form = () => {
               />
               {/* Dropdown here */}
               {/* CSS Styling Pending */}
+              {/* BUG FIX: The category input is not getting added to "google form" problem selecting the value of input */}
               <Field
             name="selectedOption"
             component={Select}
