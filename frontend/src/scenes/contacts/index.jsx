@@ -1,22 +1,43 @@
+
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
-
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    { field: "firstName", headerName: "First Name" },  // Changed column header
+    { field: "lastName", headerName: "Last Name" },    // Changed column header
     {
-      field: "name",
-      headerName: "Name",
+      field: "email",
+      headerName: "Email",
       flex: 1,
       cellClassName: "name-column--cell",
+    },
+    {
+      field: "contactNo",
+      headerName: "Contact No",
+      flex: 1,
+    },
+    {
+      field: "address1",
+      headerName: "Address 1",
+      flex: 1,
+    },
+    {
+      field: "address2",
+      headerName: "Address 2",
+      flex: 1,
+    },
+    {
+      field: "experience",
+      headerName: "Experience",
+      flex: 1,
     },
     {
       field: "age",
@@ -26,28 +47,8 @@ const Contacts = () => {
       align: "left",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-    },
-    {
-      field: "address",
-      headerName: "Address",
-      flex: 1,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      flex: 1,
-    },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
+      field: "category",
+      headerName: "Category",
       flex: 1,
     },
   ];
@@ -55,8 +56,8 @@ const Contacts = () => {
   return (
     <Box m="20px">
       <Header
-        title="CONTACTS"
-        subtitle="List of Contacts for Future Reference"
+        title="Details"
+        subtitle="List of details for Future Reference"
       />
       <Box
         m="40px 0 0 0"
