@@ -8,37 +8,35 @@ import Select from 'react-select';
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const options = [
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-    { value: "option3", label: "Option 3" },
-  ];
-
   const scriptURL =
     "https://script.google.com/macros/s/AKfycbz05BSbW1I6l5QDPACXJ2C8oHdebf_R5ewi8iBrJ8S3vLZht7MfNuojze2LxbT8TFa0/exec";
 
-  const handleFormSubmit = async (values) => {
-    console.log(values);
-    try {
-      const response = await fetch(scriptURL, {
-        method: "POST",
-        body: new URLSearchParams(values),
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    const handleFormSubmit = async (values, { resetForm }) => {
+      console.log(values);
+      try {
+        const response = await fetch(scriptURL, {
+          method: "POST",
+          body: new URLSearchParams(values),
+        });
+    
+        // Reset the form after successful submission
+        resetForm();
+    
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
   return (
     <Box m="20px">
       <Header title="CREATE USER" subtitle="Create a New User Profile" />
 
       <Formik
-        onSubmit={handleFormSubmit}
-        initialValues={initialValues}
-        validationSchema={checkoutSchema}
-        name="submit-to-google-form"
-      >
+  onSubmit={(values, { resetForm }) => handleFormSubmit(values, { resetForm })}
+  initialValues={initialValues}
+  validationSchema={checkoutSchema}
+  name="submit-to-google-form"
+>
         {({
           values,
           errors,
@@ -160,16 +158,20 @@ const Form = () => {
                 helperText={touched.age && errors.experience}
                 sx={{ gridColumn: "span 4" }}
               />
-              {/* Dropdown here */}
-              {/* CSS Styling Pending */}
-              {/* BUG FIX: The category input is not getting added to "google form" problem selecting the value of input */}
-              <Field
-            name="selectedOption"
-            component={Select}
-            options={options}
-            value={values.category}
-            placeholder="Select an option..."
-          />
+              
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Category"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.category}
+                name="category"
+                error={!!touched.category && !!errors.category}
+                helperText={touched.category && errors.category}
+                sx={{ gridColumn: "span 4" }}
+              />
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
@@ -204,6 +206,9 @@ const initialValues = {
   contact: "",
   address1: "",
   address2: "",
+  experience:"",
+  age:"",
+  category:""
 };
 
 export default Form;
