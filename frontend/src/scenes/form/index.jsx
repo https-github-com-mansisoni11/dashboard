@@ -9,7 +9,7 @@ const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const scriptURL =
-    "https://script.google.com/macros/s/AKfycbz05BSbW1I6l5QDPACXJ2C8oHdebf_R5ewi8iBrJ8S3vLZht7MfNuojze2LxbT8TFa0/exec";
+    "https://script.google.com/macros/s/AKfycbwQfnzs4LwfhGgCscR65hG-MQEf3M7zypZDdBqv2hiGaofjFUiNyzbfUO6xgKxJBVWd/exec";
 
     const handleFormSubmit = async (values, { resetForm }) => {
       console.log(values);
