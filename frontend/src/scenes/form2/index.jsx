@@ -10,7 +10,7 @@ const DealsForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const scriptURL =
-    "https://script.google.com/macros/s/AKfycbwHK2tLx9eAHBbGpFyPBxfKg9x82BezzoV5O6aoYa_4LqQPTulEfJ5mH18pz1SuAIhRAQ/exec";
+    "https://script.google.com/macros/s/AKfycbyKbtLrjeYCfHuuQlm1gMzOY-Gi8CN14dZI-VcsqbJPvkzKSdi1ZLSDCBeNxi_DIG6ibA/exec";
 
     async function handleFormSubmitTwo(values, { resetForm }) {
     // test
@@ -86,7 +86,7 @@ const DealsForm = () => {
               <TextField
                 fullWidth
                 variant="filled"
-                type="text"
+                type="number"
                 label="Amount Of Coutr"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -99,7 +99,6 @@ const DealsForm = () => {
               <TextField
                 fullWidth
                 variant="filled"
-                type="text"
                 label="No. Of Deals"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -137,26 +136,27 @@ const DealsForm = () => {
   );
 };
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
+  customerName: yup.string().required("required"),
+  companyName: yup.string().required("required"),
+  coutrAmount: yup
+    .number()
+    .required("required")
+    .typeError("Amount must be a number"),
+  noOfDeals: yup
+    .number()
+    .required("required")
+    .typeError("Number of Deals must be a number"),
+  date: yup.string().required("required"),
 });
+
 const initialValues = {
   customerName: "",
   companyName: "",
   coutrAmount: "",
   noOfDeals: "",
   date: ""
-  };
+};
 
 export default DealsForm;
