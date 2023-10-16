@@ -140,14 +140,14 @@ const DealsForm = () => {
 const checkoutSchema = yup.object().shape({
   customerName: yup.string().required("required"),
   companyName: yup.string().required("required"),
-  coutrAmount: yup
-    .number()
-    .required("required")
-    .typeError("Amount must be a number"),
-  noOfDeals: yup
-    .number()
-    .required("required")
-    .typeError("Number of Deals must be a number"),
+  // coutrAmount: yup
+  //   .number()
+  //   .required("required")
+  //   .typeError("Amount must be a number"),
+  // noOfDeals: yup
+  //   .number()
+  //   .required("required")
+  //   .typeError("Number of Deals must be a number"),
   date: yup.string().required("required"),
 });
 
